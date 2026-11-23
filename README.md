@@ -80,6 +80,8 @@ Este cambio permite completar los tamaños pedidos con una pila acotada y sin au
 | conteo_lineal | 1,000,000 | RecursionError: no resuelve este tamaño |
 | conteo_lineal | 10,000,000 | RecursionError: no resuelve este tamaño |
 
+**Explicación de la tabla de diagnóstico.** `correcto` indica que la función terminó y obtuvo el resultado esperado. `RecursionError` indica que se alcanzó el límite de profundidad antes de resolver el problema; no representa un resultado numérico ni un tiempo exitoso. La suma de cola sigue fallando porque esa forma de escritura no elimina automáticamente las llamadas anidadas en Python. Esta tabla explica por qué el experimento grande usa recorridos balanceados en lugar de ampliar el límite de la pila.
+
 Las tres funciones lineales están incluidas también en C++ y MATLAB como ejemplos didácticos y se prueban con N=10. **No se ejecutaron a diez millones de niveles en esos lenguajes**: no se presentan tiempos ficticios ni se provoca deliberadamente un desbordamiento de pila. Los gráficos principales corresponden a las variantes recursivas descritas arriba.
 
 ## 5. Método de cronometraje
@@ -106,6 +108,8 @@ El CSV también incluye **bytes lógicos de entrada y capacidad de salida**, cal
 | Búsqueda | 80 000 000 bytes | resultado escalar | 76.29 MiB más escalar |
 | Cuadrados | sin arreglo de entrada | 80 000 000 bytes | 76.29 MiB |
 | Conteo y suma | N escalar | resultado escalar | O(1), además de la pila |
+
+**Explicación de la tabla de tamaños.** Estas cifras describen la capacidad de los datos numéricos, no el RSS observado. Filtrar requiere conservar entrada y salida; buscar necesita el arreglo de entrada; calcular cuadrados reserva únicamente la salida. Contar y sumar trabajan con escalares. Por ello, los tres primeros pueden aumentar su memoria con N, mientras que los dos últimos no necesitan una colección de N resultados. El costo de la pila y del entorno se analiza por separado.
 
 No se utiliza `sys.getsizeof(lista)` como si incluyera los objetos de todos sus elementos. Tampoco se comparan mediciones de `tracemalloc` de Python con RSS de otro lenguaje como si fueran la misma magnitud.
 
@@ -143,6 +147,18 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 | Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 8.6521721 | 6.589844 | 63.38 | 68.56 |
 | Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 44.667369 | 42.742619 | 200.33 | 206.72 |
 
+**Explicación de la tabla.** Cada fila mide el recorrido de N valores y la copia de los que son mayores que 5. Aunque solo se conserva aproximadamente la mitad, ambos métodos deben examinar todos los valores: el trabajo sigue siendo O(N). La recursión cambia el orden de las llamadas, no el criterio de selección.
+
+**Comparación en el tamaño más grande de cada lenguaje:**
+
+- **Python, N=10,000,000:** 1.668 s iterativo y 1.569 s recursivo; la recursiva tardó un 5.9% menos que la iterativa. El RSS fue 150.66 y 150.47 MiB, respectivamente.
+- **C++, N=10,000,000:** 0.05141 s iterativo y 0.04809 s recursivo; la recursiva tardó un 6.5% menos que la iterativa. El RSS fue 153.91 y 153.91 MiB, respectivamente.
+- **Lenguaje MATLAB · GNU Octave, N=10,000,000:** 44.67 s iterativo y 42.74 s recursivo; la recursiva tardó un 4.3% menos que la iterativa. El RSS fue 200.33 y 206.72 MiB, respectivamente.
+
+**Interpretación de la memoria.** La memoria aumenta porque se conserva el arreglo de entrada y se reserva capacidad para N valores de salida. Los bytes reservados no son necesariamente páginas residentes: Python escribe solo el prefijo útil del búfer. Por eso no debe atribuirse toda diferencia de RSS entre lenguajes a la recursión.
+
+**Alcance de la conclusión.** Para N=10 y N=100 la recursiva entra directamente en el caso base de 256 elementos; esas filas no miden una cadena de subdivisiones. Los dos tamaños más grandes tienen una sola medición por caso. Un tiempo menor en esta ejecución no demuestra una ventaja estable ni una mejora de complejidad.
+
 ![Tiempo y memoria: Filtrado: valores mayores que 5](graficas/filtrado_tiempo_memoria.png)
 
 ### Conteo de N elementos
@@ -170,6 +186,18 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 | Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.055734158 | 0.075867891 | 47.25 | 48.17 |
 | Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 0.62048507 | 0.691957 | 46.97 | 47.84 |
 | Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 5.8599 | 8.2143989 | 47.16 | 47.66 |
+
+**Explicación de la tabla.** La tabla mide N incrementos, sin imprimir cada paso ni guardar una lista de resultados. Ambos métodos producen exactamente N. La variante recursiva divide el trabajo en bloques, pero también ejecuta N incrementos, por lo que las dos tienen tiempo O(N).
+
+**Comparación en el tamaño más grande de cada lenguaje:**
+
+- **Python, N=10,000,000:** 0.3931 s iterativo y 0.4301 s recursivo; la recursiva tardó un 9.4% más que la iterativa. El RSS fue 29.02 y 29.02 MiB, respectivamente.
+- **C++, N=10,000,000:** 0.01812 s iterativo y 0.02188 s recursivo; la recursiva tardó un 20.8% más que la iterativa. El RSS fue 1.27 y 1.27 MiB, respectivamente.
+- **Lenguaje MATLAB · GNU Octave, N=10,000,000:** 5.86 s iterativo y 8.214 s recursivo; la recursiva tardó un 40.2% más que la iterativa. El RSS fue 47.16 y 47.66 MiB, respectivamente.
+
+**Interpretación de la memoria.** El conteo no reserva un arreglo proporcional a N. Por ello, el RSS debería mantenerse cerca del costo fijo del proceso; las variaciones pequeñas no prueban crecimiento de memoria con N. La pila del recorrido recursivo crece como O(log N), pero puede ser demasiado pequeña para distinguirla en el RSS total.
+
+**Alcance de la conclusión.** Para N=10 y N=100 la recursiva entra directamente en el caso base de 256 elementos; esas filas no miden una cadena de subdivisiones. Los dos tamaños más grandes tienen una sola medición por caso. Un tiempo menor en esta ejecución no demuestra una ventaja estable ni una mejora de complejidad.
 
 ![Tiempo y memoria: Conteo de N elementos](graficas/conteo_tiempo_memoria.png)
 
@@ -199,6 +227,18 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 | Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 0.86981797 | 1.0759869 | 48.33 | 47.95 |
 | Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 8.8760171 | 11.392762 | 47.73 | 47.98 |
 
+**Explicación de la tabla.** Cada fila corresponde a sumar los enteros de 1 a N; la fórmula N*(N+1)/2 se usa únicamente para validar. Las dos versiones hacen N adiciones. La división recursiva limita la profundidad de pila, pero no reduce el número de términos ni convierte el tiempo en O(log N).
+
+**Comparación en el tamaño más grande de cada lenguaje:**
+
+- **Python, N=10,000,000:** 0.5315 s iterativo y 0.5856 s recursivo; la recursiva tardó un 10.2% más que la iterativa. El RSS fue 29.33 y 29.02 MiB, respectivamente.
+- **C++, N=10,000,000:** 0.01922 s iterativo y 0.01879 s recursivo; la recursiva tardó un 2.2% menos que la iterativa. El RSS fue 1.27 y 1.27 MiB, respectivamente.
+- **Lenguaje MATLAB · GNU Octave, N=10,000,000:** 8.876 s iterativo y 11.39 s recursivo; la recursiva tardó un 28.4% más que la iterativa. El RSS fue 47.73 y 47.98 MiB, respectivamente.
+
+**Interpretación de la memoria.** Solo se conserva el acumulador, además de los índices y de la pila recursiva. Un RSS parecido al aumentar N es compatible con la ausencia de arreglos grandes. Una diferencia pequeña de memoria entre los métodos puede proceder del intérprete o del asignador, no de la suma.
+
+**Alcance de la conclusión.** Para N=10 y N=100 la recursiva entra directamente en el caso base de 256 elementos; esas filas no miden una cadena de subdivisiones. Los dos tamaños más grandes tienen una sola medición por caso. Un tiempo menor en esta ejecución no demuestra una ventaja estable ni una mejora de complejidad.
+
 ![Tiempo y memoria: Suma de 1 a N](graficas/suma_tiempo_memoria.png)
 
 ### Búsqueda binaria del último elemento
@@ -227,6 +267,18 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 | Lenguaje MATLAB · GNU Octave | 1,000,000 | 3 | 0.00021131587 | 0.00038288212 | 55.45 | 56.20 |
 | Lenguaje MATLAB · GNU Octave | 10,000,000 | 3 | 0.00025612378 | 0.0004969871 | 124.05 | 124.89 |
 
+**Explicación de la tabla.** Se busca el último elemento de un arreglo ordenado. El tiempo de cada fila es por búsqueda: se cronometra un lote de 1 000 llamadas y se divide entre 1 000. Al pasar de 10 a 10 000 000 elementos, las comparaciones pasan de 4 a 24, por lo que el trabajo aumenta de forma logarítmica y no en proporción al tamaño del arreglo.
+
+**Comparación en el tamaño más grande de cada lenguaje:**
+
+- **Python, N=10,000,000:** 6.594 µs iterativo y 7.045 µs recursivo; la recursiva tardó un 6.8% más que la iterativa. El RSS fue 105.39 y 105.41 MiB, respectivamente.
+- **C++, N=10,000,000:** 0.1126 µs iterativo y 0.07571 µs recursivo; la recursiva tardó un 32.8% menos que la iterativa. El RSS fue 77.59 y 77.58 MiB, respectivamente.
+- **Lenguaje MATLAB · GNU Octave, N=10,000,000:** 256.1 µs iterativo y 497 µs recursivo; la recursiva tardó un 94.0% más que la iterativa. El RSS fue 124.05 y 124.89 MiB, respectivamente.
+
+**Interpretación de la memoria.** Aquí tiempo y memoria crecen por motivos diferentes: la búsqueda examina O(log N) posiciones, pero la entrada completa ocupa O(N) memoria. El arreglo de diez millones de double ocupa 76.29 MiB antes de sumar el entorno. El RSS no permite aislar fácilmente la diferencia entre O(1) de memoria auxiliar iterativa y O(log N) de pila recursiva.
+
+**Alcance de la conclusión.** La recursión pura no cambia la complejidad de la búsqueda. Las diferencias observadas dependen también del código compilado o interpretado y de la caché. Son medianas de tres lotes del mismo objetivo, no de búsquedas aleatorias.
+
 ![Tiempo y memoria: Búsqueda binaria del último elemento](graficas/busqueda_tiempo_memoria.png)
 
 ### Cuadrados de 0 a N−1
@@ -254,6 +306,18 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 | Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.26173902 | 0.27939105 | 53.38 | 53.20 |
 | Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 2.5259931 | 2.7154968 | 60.50 | 57.88 |
 | Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 32.389344 | 29.813134 | 124.06 | 131.52 |
+
+**Explicación de la tabla.** Se calcula y almacena un resultado por elemento: 0², 1², …, (N−1)². Ambas versiones efectúan N multiplicaciones y N escrituras, de modo que su trabajo es O(N). La recursión añade divisiones y llamadas, pero no elimina cálculos.
+
+**Comparación en el tamaño más grande de cada lenguaje:**
+
+- **Python, N=10,000,000:** 2.045 s iterativo y 2.016 s recursivo; la recursiva tardó un 1.4% menos que la iterativa. El RSS fue 112.72 y 113.39 MiB, respectivamente.
+- **C++, N=10,000,000:** 0.01524 s iterativo y 0.02093 s recursivo; la recursiva tardó un 37.4% más que la iterativa. El RSS fue 77.59 y 77.58 MiB, respectivamente.
+- **Lenguaje MATLAB · GNU Octave, N=10,000,000:** 32.39 s iterativo y 29.81 s recursivo; la recursiva tardó un 8.0% menos que la iterativa. El RSS fue 124.06 y 131.52 MiB, respectivamente.
+
+**Interpretación de la memoria.** El crecimiento principal de memoria corresponde a la salida: diez millones de double requieren 76.29 MiB. No se crea un arreglo de entrada, ya que los valores proceden del índice del recorrido. El RSS supera esa cifra por las bibliotecas, el proceso y la validación; no toda esa diferencia es memoria de pila.
+
+**Alcance de la conclusión.** Para N=10 y N=100 la recursiva entra directamente en el caso base de 256 elementos; esas filas no miden una cadena de subdivisiones. Los dos tamaños más grandes tienen una sola medición por caso. Un tiempo menor en esta ejecución no demuestra una ventaja estable ni una mejora de complejidad.
 
 ![Tiempo y memoria: Cuadrados de 0 a N−1](graficas/cuadrados_tiempo_memoria.png)
 

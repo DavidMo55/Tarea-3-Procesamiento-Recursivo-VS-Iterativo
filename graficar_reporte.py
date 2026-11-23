@@ -59,6 +59,84 @@ def main():
     print('Gráficas y README.md generados.')
 
 
+def explicar_tabla(filas, lenguajes, algoritmo):
+    explicaciones = {
+        'filtrado': (
+            'Cada fila mide el recorrido de N valores y la copia de los que son mayores que 5. '
+            'Aunque solo se conserva aproximadamente la mitad, ambos métodos deben examinar todos los valores: '
+            'el trabajo sigue siendo O(N). La recursión cambia el orden de las llamadas, no el criterio de selección.',
+            'La memoria aumenta porque se conserva el arreglo de entrada y se reserva capacidad para N valores de salida. '
+            'Los bytes reservados no son necesariamente páginas residentes: Python escribe solo el prefijo útil del búfer. '
+            'Por eso no debe atribuirse toda diferencia de RSS entre lenguajes a la recursión.'),
+        'conteo': (
+            'La tabla mide N incrementos, sin imprimir cada paso ni guardar una lista de resultados. '
+            'Ambos métodos producen exactamente N. La variante recursiva divide el trabajo en bloques, '
+            'pero también ejecuta N incrementos, por lo que las dos tienen tiempo O(N).',
+            'El conteo no reserva un arreglo proporcional a N. Por ello, el RSS debería mantenerse cerca del costo fijo '
+            'del proceso; las variaciones pequeñas no prueban crecimiento de memoria con N. '
+            'La pila del recorrido recursivo crece como O(log N), pero puede ser demasiado pequeña para distinguirla en el RSS total.'),
+        'suma': (
+            'Cada fila corresponde a sumar los enteros de 1 a N; la fórmula N*(N+1)/2 se usa únicamente para validar. '
+            'Las dos versiones hacen N adiciones. La división recursiva limita la profundidad de pila, '
+            'pero no reduce el número de términos ni convierte el tiempo en O(log N).',
+            'Solo se conserva el acumulador, además de los índices y de la pila recursiva. '
+            'Un RSS parecido al aumentar N es compatible con la ausencia de arreglos grandes. '
+            'Una diferencia pequeña de memoria entre los métodos puede proceder del intérprete o del asignador, no de la suma.'),
+        'busqueda': (
+            'Se busca el último elemento de un arreglo ordenado. El tiempo de cada fila es por búsqueda: '
+            'se cronometra un lote de 1 000 llamadas y se divide entre 1 000. '
+            'Al pasar de 10 a 10 000 000 elementos, las comparaciones pasan de 4 a 24, '
+            'por lo que el trabajo aumenta de forma logarítmica y no en proporción al tamaño del arreglo.',
+            'Aquí tiempo y memoria crecen por motivos diferentes: la búsqueda examina O(log N) posiciones, '
+            'pero la entrada completa ocupa O(N) memoria. El arreglo de diez millones de double ocupa 76.29 MiB '
+            'antes de sumar el entorno. El RSS no permite aislar fácilmente la diferencia entre O(1) de memoria auxiliar '
+            'iterativa y O(log N) de pila recursiva.'),
+        'cuadrados': (
+            'Se calcula y almacena un resultado por elemento: 0², 1², …, (N−1)². '
+            'Ambas versiones efectúan N multiplicaciones y N escrituras, de modo que su trabajo es O(N). '
+            'La recursión añade divisiones y llamadas, pero no elimina cálculos.',
+            'El crecimiento principal de memoria corresponde a la salida: diez millones de double requieren 76.29 MiB. '
+            'No se crea un arreglo de entrada, ya que los valores proceden del índice del recorrido. '
+            'El RSS supera esa cifra por las bibliotecas, el proceso y la validación; no toda esa diferencia es memoria de pila.')
+    }
+    operacion, memoria = explicaciones[algoritmo]
+    texto = '\n**Explicación de la tabla.** ' + operacion + '\n\n'
+    texto += '**Comparación en el tamaño más grande de cada lenguaje:**\n\n'
+    for lenguaje in lenguajes:
+        datos = [r for r in filas if r['algoritmo'] == algoritmo and r['lenguaje'] == lenguaje
+                 and r['estado'] == 'correcto']
+        if not datos:
+            continue
+        n = max(r['N'] for r in datos)
+        par = {r['metodo']: r for r in datos if r['N'] == n}
+        if set(par) != {'iterativo', 'recursivo'}:
+            continue
+        i, r = par['iterativo'], par['recursivo']
+        ti, tr = i['tiempo_mediana_s'], r['tiempo_mediana_s']
+        cambio = (tr / ti - 1) * 100
+        if abs(cambio) < 0.05:
+            comparacion = 'los tiempos fueron prácticamente iguales'
+        elif cambio > 0:
+            comparacion = f'la recursiva tardó un {cambio:.1f}% más que la iterativa'
+        else:
+            comparacion = f'la recursiva tardó un {-cambio:.1f}% menos que la iterativa'
+        escala, unidad = (1e6, 'µs') if algoritmo == 'busqueda' else (1, 's')
+        texto += (f"- **{LABEL[lenguaje]}, N={n:,}:** {ti*escala:.4g} {unidad} iterativo y "
+                  f"{tr*escala:.4g} {unidad} recursivo; {comparacion}. "
+                  f"El RSS fue {i['rss_pico_bytes']/2**20:.2f} y {r['rss_pico_bytes']/2**20:.2f} MiB, "
+                  'respectivamente.\n')
+    texto += '\n**Interpretación de la memoria.** ' + memoria + '\n\n'
+    if algoritmo == 'busqueda':
+        texto += ('**Alcance de la conclusión.** La recursión pura no cambia la complejidad de la búsqueda. '
+                  'Las diferencias observadas dependen también del código compilado o interpretado y de la caché. '
+                  'Son medianas de tres lotes del mismo objetivo, no de búsquedas aleatorias.\n')
+    else:
+        texto += ('**Alcance de la conclusión.** Para N=10 y N=100 la recursiva entra directamente en el caso base de 256 elementos; '
+                  'esas filas no miden una cadena de subdivisiones. Los dos tamaños más grandes tienen una sola medición por caso. '
+                  'Un tiempo menor en esta ejecución no demuestra una ventaja estable ni una mejora de complejidad.\n')
+    return texto
+
+
 def informe(filas,lenguajes):
     entorno=json.loads((RAIZ/'resultados'/'entorno.json').read_text())
     total=len(filas); ok=sum(r['estado']=='correcto' for r in filas)
@@ -127,6 +205,8 @@ Este cambio permite completar los tamaños pedidos con una pila acotada y sin au
     for r in diag:
         texto+=f"| {r['funcion']} | {int(r['N']):,} | {r['estado']} |\n"
     texto+='''
+**Explicación de la tabla de diagnóstico.** `correcto` indica que la función terminó y obtuvo el resultado esperado. `RecursionError` indica que se alcanzó el límite de profundidad antes de resolver el problema; no representa un resultado numérico ni un tiempo exitoso. La suma de cola sigue fallando porque esa forma de escritura no elimina automáticamente las llamadas anidadas en Python. Esta tabla explica por qué el experimento grande usa recorridos balanceados en lugar de ampliar el límite de la pila.
+
 Las tres funciones lineales están incluidas también en C++ y MATLAB como ejemplos didácticos y se prueban con N=10. **No se ejecutaron a diez millones de niveles en esos lenguajes**: no se presentan tiempos ficticios ni se provoca deliberadamente un desbordamiento de pila. Los gráficos principales corresponden a las variantes recursivas descritas arriba.
 
 ## 5. Método de cronometraje
@@ -154,6 +234,8 @@ El CSV también incluye **bytes lógicos de entrada y capacidad de salida**, cal
 | Cuadrados | sin arreglo de entrada | 80 000 000 bytes | 76.29 MiB |
 | Conteo y suma | N escalar | resultado escalar | O(1), además de la pila |
 
+**Explicación de la tabla de tamaños.** Estas cifras describen la capacidad de los datos numéricos, no el RSS observado. Filtrar requiere conservar entrada y salida; buscar necesita el arreglo de entrada; calcular cuadrados reserva únicamente la salida. Contar y sumar trabajan con escalares. Por ello, los tres primeros pueden aumentar su memoria con N, mientras que los dos últimos no necesitan una colección de N resultados. El costo de la pila y del entorno se analiza por separado.
+
 No se utiliza `sys.getsizeof(lista)` como si incluyera los objetos de todos sus elementos. Tampoco se comparan mediciones de `tracemalloc` de Python con RSS de otro lenguaje como si fueran la misma magnitud.
 
 ## 7. Validación
@@ -173,6 +255,7 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
                 if set(par)!={'iterativo','recursivo'}: continue
                 i,r=par['iterativo'],par['recursivo']
                 texto+=f"| {LABEL[l]} | {n:,} | {i['repeticiones']} | {i['tiempo_mediana_s']:.8g} | {r['tiempo_mediana_s']:.8g} | {i['rss_pico_bytes']/2**20:.2f} | {r['rss_pico_bytes']/2**20:.2f} |\n"
+        texto+=explicar_tabla(filas,lenguajes,a)
         texto+=f'\n![Tiempo y memoria: {nombre}](graficas/{a}_tiempo_memoria.png)\n\n'
     texto+='''## 9. Interpretación
 Las gráficas tienen N en escala logarítmica. El tiempo también usa escala logarítmica; la memoria se muestra en MiB con escala vertical lineal. Cada fila representa un lenguaje/entorno. **Las escalas verticales se ajustan por panel**, por lo que comparar alturas entre filas no sustituye comparar sus etiquetas o las tablas.
