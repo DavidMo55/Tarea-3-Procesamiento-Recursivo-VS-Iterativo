@@ -1,3 +1,6 @@
 __pycache__/
 .cache_matplotlib/
 .DS_Store
+runtime_local.json
+algoritmos_cpp
+algoritmos_cpp.exe

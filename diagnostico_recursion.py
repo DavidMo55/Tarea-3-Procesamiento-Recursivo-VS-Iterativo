@@ -25,7 +25,7 @@ def main():
             filas.append({'funcion':nombre,'N':n,'estado':estado,'resultado':valor,
                           'limite_recursion_python':sys.getrecursionlimit()})
     with (RAIZ/'resultados'/'recursion_lineal.csv').open('w',newline='') as archivo:
-        w=csv.DictWriter(archivo,fieldnames=list(filas[0])); w.writeheader(); w.writerows(filas)
+        w=csv.DictWriter(archivo,fieldnames=list(filas[0]),lineterminator="\n"); w.writeheader(); w.writerows(filas)
     comparaciones=[]
     for n in TAMANOS:
         lo,hi=0,n-1; contador=0; objetivo=n-1
@@ -35,7 +35,7 @@ def main():
             lo=medio+1
         comparaciones.append({'N':n,'comparaciones':contador,'indice':medio})
     with (RAIZ/'resultados'/'comparaciones_busqueda.csv').open('w',newline='') as archivo:
-        w=csv.DictWriter(archivo,fieldnames=list(comparaciones[0])); w.writeheader(); w.writerows(comparaciones)
+        w=csv.DictWriter(archivo,fieldnames=list(comparaciones[0]),lineterminator="\n"); w.writeheader(); w.writerows(comparaciones)
     print('Diagnóstico de recursión lineal y contador de búsqueda: guardados.')
 
 

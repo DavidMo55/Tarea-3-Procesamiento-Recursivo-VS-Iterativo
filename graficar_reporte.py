@@ -56,7 +56,7 @@ def main():
     ax.set_xticks(TAMANOS); ax.set_xticklabels(['10','100','1k','10k','100k','1M','10M']); ax.grid(alpha=.25)
     fig.savefig(graficas/'comparaciones_busqueda.png',dpi=150); plt.close(fig)
     informe(filas,lenguajes)
-    print('Gráficas y REPORTE.md generados.')
+    print('Gráficas y README.md generados.')
 
 
 def informe(filas,lenguajes):
@@ -211,7 +211,21 @@ Un cociente T_rec/T_iter mayor que 1 indica que la recursiva tardó más. Los re
 - `resultados/registros.jsonl`: registro completo de ejecución y RSS por proceso.
 - `resultados/logs/`: salidas de cada proceso, para auditoría.
 - `resultados/recursion_lineal.csv`, `comparaciones_busqueda.csv`, `entorno.json`: diagnósticos y versiones.
-- `LEEME.md`: instrucciones para ejecutarlo en VS Code o en una terminal.
+
+### Ejecutar en una terminal o VS Code
+
+Se requieren Python con NumPy y Matplotlib, un compilador C++17 GCC/Clang y GNU Octave o MATLAB. La medición externa de RSS utiliza `wait4`, disponible en macOS y Linux.
+
+```sh
+python3 -m pip install -r requirements.txt
+python3 ejecutar.py
+```
+
+En VS Code abre esta carpeta y ejecuta la tarea de compilación (⌘⇧B en macOS). Para regenerar únicamente las gráficas y este informe: `python3 ejecutar.py --solo-graficas`. Para continuar una ejecución interrumpida sin cambios de código: `python3 ejecutar.py --reanudar`. Para usar MATLAB real: `python3 ejecutar.py --matlab`.
+
+`runtime_local.json` es una configuración local opcional, excluida de Git. También se pueden indicar los ejecutables con `TAREA3_PYTHON`, `TAREA3_OCTAVE` y `TAREA3_MATLAB`. Sin configuración local, se utilizan el intérprete Python actual y los ejecutables del PATH. El orquestador compila C++ antes de medir; el binario no necesita almacenarse en GitHub.
+
+Las gráficas y README se regeneran a partir de los resultados, por lo que las explicaciones permanentes deben editarse en `graficar_reporte.py`. La ejecución completa sustituye los resultados existentes.
 
 ## 11. Entorno y límites de las conclusiones
 
@@ -229,7 +243,7 @@ La comparación distingue tres cosas: iteración, recursión lineal que puede su
 - [GNU Octave: información del sistema](https://docs.octave.org/interpreter/System-Information.html).
 - [MathWorks: memory](https://www.mathworks.com/help/matlab/ref/memory.html). Se eligió medición externa de RSS; la función `memory` de MATLAB tiene restricciones de plataforma.
 '''
-    (RAIZ/'REPORTE.md').write_text(texto)
+    (RAIZ/'README.md').write_text(texto)
 
 
 if __name__=='__main__': main()

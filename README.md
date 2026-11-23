@@ -121,27 +121,27 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 
 | Lenguaje / entorno | N | Rep. | Tiempo iterativo (s) | Tiempo recursivo (s) | RSS iterativo (MiB) | RSS recursivo (MiB) |
 |---|---:|---:|---:|---:|---:|---:|
-| Python | 10 | 3 | 1.0166001e-05 | 9.8340006e-06 | 39.45 | 39.50 |
-| Python | 100 | 3 | 2.1125001e-05 | 2.1e-05 | 39.48 | 39.42 |
-| Python | 1,000 | 3 | 0.000159041 | 0.000163875 | 39.53 | 39.30 |
-| Python | 10,000 | 3 | 0.001541542 | 0.001622167 | 39.58 | 39.36 |
-| Python | 100,000 | 3 | 0.015244375 | 0.015434458 | 42.23 | 42.17 |
-| Python | 1,000,000 | 1 | 0.15019033 | 0.16031558 | 52.50 | 52.59 |
-| Python | 10,000,000 | 1 | 1.4902383 | 1.5410544 | 155.75 | 156.23 |
+| Python | 10 | 3 | 1.3040999e-05 | 1.1167e-05 | 34.27 | 34.11 |
+| Python | 100 | 3 | 2.2667e-05 | 2.0625001e-05 | 34.16 | 34.38 |
+| Python | 1,000 | 3 | 0.000160334 | 0.000152542 | 34.00 | 34.05 |
+| Python | 10,000 | 3 | 0.001507542 | 0.001570833 | 34.22 | 34.05 |
+| Python | 100,000 | 3 | 0.01627175 | 0.016627084 | 36.92 | 37.06 |
+| Python | 1,000,000 | 1 | 0.21179508 | 0.18659933 | 48.75 | 48.05 |
+| Python | 10,000,000 | 1 | 1.6683986 | 1.569407 | 150.66 | 150.47 |
 | C++ | 10 | 3 | 1.25e-07 | 1.25e-07 | 1.27 | 1.27 |
-| C++ | 100 | 3 | 2.92e-07 | 3.33e-07 | 1.27 | 1.27 |
-| C++ | 1,000 | 3 | 1.667e-06 | 1.917e-06 | 1.30 | 1.30 |
-| C++ | 10,000 | 3 | 1.8542e-05 | 1.9125e-05 | 1.45 | 1.45 |
-| C++ | 100,000 | 3 | 0.00016675 | 0.000147042 | 2.83 | 2.83 |
-| C++ | 1,000,000 | 1 | 0.002032416 | 0.0021735 | 16.59 | 16.59 |
-| C++ | 10,000,000 | 1 | 0.023529166 | 0.021816417 | 153.91 | 153.91 |
-| Lenguaje MATLAB · GNU Octave | 10 | 3 | 0.00011181831 | 0.00011396408 | 49.00 | 49.19 |
-| Lenguaje MATLAB · GNU Octave | 100 | 3 | 0.00045800209 | 0.00046014786 | 48.88 | 48.41 |
-| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.0039229393 | 0.0039141178 | 49.20 | 49.47 |
-| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.040202141 | 0.042045832 | 49.22 | 48.97 |
-| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.39075112 | 0.40954089 | 53.56 | 54.81 |
-| Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 3.846663 | 4.0144269 | 66.34 | 67.56 |
-| Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 37.785312 | 41.224572 | 204.83 | 204.91 |
+| C++ | 100 | 3 | 4.16e-07 | 3.75e-07 | 1.27 | 1.27 |
+| C++ | 1,000 | 3 | 2e-06 | 2.625e-06 | 1.30 | 1.31 |
+| C++ | 10,000 | 3 | 2.4416e-05 | 6.025e-05 | 1.45 | 1.55 |
+| C++ | 100,000 | 3 | 0.000423167 | 0.000212167 | 3.61 | 2.83 |
+| C++ | 1,000,000 | 1 | 0.00506475 | 0.003651667 | 16.59 | 16.58 |
+| C++ | 10,000,000 | 1 | 0.051405625 | 0.048089791 | 153.91 | 153.91 |
+| Lenguaje MATLAB · GNU Octave | 10 | 3 | 0.00015497208 | 0.00016093254 | 49.91 | 49.05 |
+| Lenguaje MATLAB · GNU Octave | 100 | 3 | 0.00043797493 | 0.00046801567 | 49.20 | 49.66 |
+| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.0041799545 | 0.0040130615 | 49.20 | 49.28 |
+| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.038982868 | 0.040517807 | 49.70 | 49.72 |
+| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.3729651 | 0.41833997 | 54.16 | 54.30 |
+| Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 8.6521721 | 6.589844 | 63.38 | 68.56 |
+| Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 44.667369 | 42.742619 | 200.33 | 206.72 |
 
 ![Tiempo y memoria: Filtrado: valores mayores que 5](graficas/filtrado_tiempo_memoria.png)
 
@@ -149,27 +149,27 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 
 | Lenguaje / entorno | N | Rep. | Tiempo iterativo (s) | Tiempo recursivo (s) | RSS iterativo (MiB) | RSS recursivo (MiB) |
 |---|---:|---:|---:|---:|---:|---:|
-| Python | 10 | 3 | 3.8340004e-06 | 4.5419984e-06 | 34.11 | 34.03 |
-| Python | 100 | 3 | 6.3749994e-06 | 6.708e-06 | 33.86 | 34.09 |
-| Python | 1,000 | 3 | 4.0708001e-05 | 4.3292001e-05 | 34.03 | 33.91 |
-| Python | 10,000 | 3 | 0.00039625 | 0.000420791 | 33.89 | 34.09 |
-| Python | 100,000 | 3 | 0.004023458 | 0.00408975 | 34.08 | 34.16 |
-| Python | 1,000,000 | 1 | 0.040707875 | 0.041512916 | 34.08 | 34.08 |
-| Python | 10,000,000 | 1 | 0.408707 | 0.41716871 | 34.11 | 33.89 |
-| C++ | 10 | 3 | 4.1e-08 | 4.2e-08 | 1.27 | 1.27 |
-| C++ | 100 | 3 | 2.08e-07 | 1.67e-07 | 1.27 | 1.27 |
-| C++ | 1,000 | 3 | 1.583e-06 | 1.584e-06 | 1.27 | 1.27 |
-| C++ | 10,000 | 3 | 1.5291e-05 | 1.5625e-05 | 1.27 | 1.27 |
-| C++ | 100,000 | 3 | 0.000152458 | 0.000154958 | 1.27 | 1.27 |
-| C++ | 1,000,000 | 1 | 0.001527583 | 0.001546875 | 1.27 | 1.27 |
-| C++ | 10,000,000 | 1 | 0.015309459 | 0.015717625 | 1.27 | 1.27 |
-| Lenguaje MATLAB · GNU Octave | 10 | 3 | 7.2002411e-05 | 8.7976456e-05 | 47.69 | 46.94 |
-| Lenguaje MATLAB · GNU Octave | 100 | 3 | 0.00012779236 | 0.00013804436 | 47.22 | 47.45 |
-| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.00063586235 | 0.00076699257 | 47.05 | 47.36 |
-| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.0060369968 | 0.0078070164 | 47.89 | 46.88 |
-| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.05654192 | 0.071954966 | 47.47 | 47.66 |
-| Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 0.57385206 | 0.69959903 | 47.36 | 47.41 |
-| Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 5.5494418 | 7.7726138 | 47.83 | 48.09 |
+| Python | 10 | 3 | 4.1250005e-06 | 4.5000015e-06 | 29.14 | 28.94 |
+| Python | 100 | 3 | 7.5839998e-06 | 8.5829997e-06 | 29.14 | 29.05 |
+| Python | 1,000 | 3 | 4.1667001e-05 | 4.3792001e-05 | 29.14 | 29.23 |
+| Python | 10,000 | 3 | 0.000392417 | 0.000424167 | 28.97 | 29.11 |
+| Python | 100,000 | 3 | 0.003994084 | 0.004198791 | 29.16 | 28.97 |
+| Python | 1,000,000 | 1 | 0.0410415 | 0.042427 | 29.19 | 29.19 |
+| Python | 10,000,000 | 1 | 0.39312825 | 0.430111 | 29.02 | 29.02 |
+| C++ | 10 | 3 | 8.4e-08 | 8.3e-08 | 1.27 | 1.27 |
+| C++ | 100 | 3 | 2.91e-07 | 1.67e-07 | 1.27 | 1.27 |
+| C++ | 1,000 | 3 | 2.583e-06 | 2.584e-06 | 1.27 | 1.27 |
+| C++ | 10,000 | 3 | 2.5333e-05 | 2.5875e-05 | 1.27 | 1.27 |
+| C++ | 100,000 | 3 | 0.000273541 | 0.000213042 | 1.27 | 1.27 |
+| C++ | 1,000,000 | 1 | 0.001812833 | 0.002134792 | 1.27 | 1.27 |
+| C++ | 10,000,000 | 1 | 0.018116083 | 0.021884458 | 1.27 | 1.27 |
+| Lenguaje MATLAB · GNU Octave | 10 | 3 | 7.891655e-05 | 8.6069107e-05 | 47.14 | 47.11 |
+| Lenguaje MATLAB · GNU Octave | 100 | 3 | 0.00012898445 | 0.00014281273 | 47.91 | 47.55 |
+| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.00062704086 | 0.00074195862 | 48.03 | 47.16 |
+| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.0055668354 | 0.0076780319 | 48.11 | 47.56 |
+| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.055734158 | 0.075867891 | 47.25 | 48.17 |
+| Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 0.62048507 | 0.691957 | 46.97 | 47.84 |
+| Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 5.8599 | 8.2143989 | 47.16 | 47.66 |
 
 ![Tiempo y memoria: Conteo de N elementos](graficas/conteo_tiempo_memoria.png)
 
@@ -177,27 +177,27 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 
 | Lenguaje / entorno | N | Rep. | Tiempo iterativo (s) | Tiempo recursivo (s) | RSS iterativo (MiB) | RSS recursivo (MiB) |
 |---|---:|---:|---:|---:|---:|---:|
-| Python | 10 | 3 | 4.6249988e-06 | 4.2920001e-06 | 34.12 | 33.97 |
-| Python | 100 | 3 | 7.2080002e-06 | 8.166e-06 | 34.00 | 34.05 |
-| Python | 1,000 | 3 | 5.6208e-05 | 5.5791999e-05 | 34.02 | 34.08 |
-| Python | 10,000 | 3 | 0.000544459 | 0.000575458 | 34.03 | 34.19 |
-| Python | 100,000 | 3 | 0.005444542 | 0.005400417 | 34.08 | 34.08 |
-| Python | 1,000,000 | 1 | 0.057872209 | 0.05578225 | 34.08 | 34.11 |
-| Python | 10,000,000 | 1 | 0.57643792 | 0.56638825 | 34.09 | 34.09 |
-| C++ | 10 | 3 | 4.2e-08 | 4.2e-08 | 1.27 | 1.27 |
-| C++ | 100 | 3 | 2.08e-07 | 1.67e-07 | 1.27 | 1.27 |
-| C++ | 1,000 | 3 | 1.5e-06 | 1.584e-06 | 1.27 | 1.27 |
-| C++ | 10,000 | 3 | 1.5292e-05 | 1.5583e-05 | 1.27 | 1.27 |
-| C++ | 100,000 | 3 | 0.000152458 | 0.000155291 | 1.27 | 1.27 |
-| C++ | 1,000,000 | 1 | 0.00153625 | 0.001556625 | 1.27 | 1.27 |
-| C++ | 10,000,000 | 1 | 0.015407125 | 0.01557675 | 1.27 | 1.27 |
-| Lenguaje MATLAB · GNU Octave | 10 | 3 | 8.0108643e-05 | 8.9883804e-05 | 47.27 | 48.08 |
-| Lenguaje MATLAB · GNU Octave | 100 | 3 | 0.00016307831 | 0.00016593933 | 46.84 | 46.91 |
-| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.00099611282 | 0.0010740757 | 47.88 | 47.80 |
-| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.00897789 | 0.01137495 | 47.64 | 47.62 |
-| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.08770895 | 0.10452509 | 47.91 | 47.80 |
-| Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 0.88092494 | 1.0181398 | 47.28 | 47.94 |
-| Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 9.1130359 | 10.974869 | 47.09 | 48.06 |
+| Python | 10 | 3 | 4.3749988e-06 | 4.6250007e-06 | 29.17 | 29.14 |
+| Python | 100 | 3 | 8.459001e-06 | 9.542e-06 | 28.98 | 29.05 |
+| Python | 1,000 | 3 | 5.3042e-05 | 5.7917001e-05 | 29.12 | 29.16 |
+| Python | 10,000 | 3 | 0.000523167 | 0.000578541 | 29.22 | 29.00 |
+| Python | 100,000 | 3 | 0.005229583 | 0.005781333 | 29.09 | 29.14 |
+| Python | 1,000,000 | 1 | 0.057693583 | 0.058627167 | 29.16 | 28.97 |
+| Python | 10,000,000 | 1 | 0.53148579 | 0.58558883 | 29.33 | 29.02 |
+| C++ | 10 | 3 | 4.2e-08 | 1.25e-07 | 1.27 | 1.27 |
+| C++ | 100 | 3 | 2.5e-07 | 2.5e-07 | 1.27 | 1.27 |
+| C++ | 1,000 | 3 | 2.125e-06 | 1.833e-06 | 1.27 | 1.27 |
+| C++ | 10,000 | 3 | 1.7542e-05 | 1.8e-05 | 1.27 | 1.27 |
+| C++ | 100,000 | 3 | 0.000183209 | 0.0001875 | 1.27 | 1.27 |
+| C++ | 1,000,000 | 1 | 0.001825583 | 0.001966167 | 1.27 | 1.27 |
+| C++ | 10,000,000 | 1 | 0.0192165 | 0.018787 | 1.27 | 1.27 |
+| Lenguaje MATLAB · GNU Octave | 10 | 3 | 7.2002411e-05 | 8.6069107e-05 | 47.61 | 47.97 |
+| Lenguaje MATLAB · GNU Octave | 100 | 3 | 0.00016093254 | 0.00016689301 | 47.83 | 47.42 |
+| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.0010178089 | 0.0010650158 | 47.06 | 47.73 |
+| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.0091888905 | 0.011085987 | 46.92 | 47.70 |
+| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.084700108 | 0.10485411 | 47.67 | 47.47 |
+| Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 0.86981797 | 1.0759869 | 48.33 | 47.95 |
+| Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 8.8760171 | 11.392762 | 47.73 | 47.98 |
 
 ![Tiempo y memoria: Suma de 1 a N](graficas/suma_tiempo_memoria.png)
 
@@ -205,27 +205,27 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 
 | Lenguaje / entorno | N | Rep. | Tiempo iterativo (s) | Tiempo recursivo (s) | RSS iterativo (MiB) | RSS recursivo (MiB) |
 |---|---:|---:|---:|---:|---:|---:|
-| Python | 10 | 3 | 1.162833e-06 | 1.267875e-06 | 34.03 | 34.05 |
-| Python | 100 | 3 | 1.80775e-06 | 2.007334e-06 | 34.06 | 34.06 |
-| Python | 1,000 | 3 | 2.8315e-06 | 3.041834e-06 | 34.06 | 34.16 |
-| Python | 10,000 | 3 | 3.987416e-06 | 4.202333e-06 | 34.06 | 34.05 |
-| Python | 100,000 | 3 | 4.671625e-06 | 5.117459e-06 | 34.38 | 34.38 |
-| Python | 1,000,000 | 3 | 5.494083e-06 | 5.920166e-06 | 41.73 | 41.73 |
-| Python | 10,000,000 | 3 | 6.415875e-06 | 7.06575e-06 | 110.53 | 110.34 |
-| C++ | 10 | 3 | 9.208e-09 | 1.4875e-08 | 1.27 | 1.27 |
-| C++ | 100 | 3 | 1.4417e-08 | 2.1917e-08 | 1.27 | 1.27 |
-| C++ | 1,000 | 3 | 2.5375e-08 | 2.9666e-08 | 1.28 | 1.28 |
-| C++ | 10,000 | 3 | 4.3833e-08 | 3.9833e-08 | 1.36 | 1.36 |
-| C++ | 100,000 | 3 | 5.9125e-08 | 4.7334e-08 | 2.05 | 2.05 |
-| C++ | 1,000,000 | 3 | 7.4916e-08 | 5.5333e-08 | 8.94 | 8.94 |
-| C++ | 10,000,000 | 3 | 9.5917e-08 | 7.6625e-08 | 77.59 | 77.59 |
-| Lenguaje MATLAB · GNU Octave | 10 | 3 | 6.237793e-05 | 8.9547873e-05 | 48.00 | 47.09 |
-| Lenguaje MATLAB · GNU Octave | 100 | 3 | 9.6110821e-05 | 0.0001479969 | 47.17 | 47.55 |
-| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.0001215241 | 0.00020070601 | 47.59 | 48.22 |
-| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.00016090989 | 0.00027227497 | 47.72 | 48.23 |
-| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.00018389702 | 0.00033685112 | 49.19 | 49.47 |
-| Lenguaje MATLAB · GNU Octave | 1,000,000 | 3 | 0.000211972 | 0.00037633801 | 56.34 | 55.58 |
-| Lenguaje MATLAB · GNU Octave | 10,000,000 | 3 | 0.00024725294 | 0.00046399879 | 125.11 | 125.00 |
+| Python | 10 | 3 | 1.15775e-06 | 1.250833e-06 | 28.94 | 28.98 |
+| Python | 100 | 3 | 1.881208e-06 | 2.067875e-06 | 29.17 | 29.09 |
+| Python | 1,000 | 3 | 2.978959e-06 | 3.063084e-06 | 29.14 | 29.12 |
+| Python | 10,000 | 3 | 3.985709e-06 | 4.211166e-06 | 28.97 | 29.14 |
+| Python | 100,000 | 3 | 4.778709e-06 | 5.248334e-06 | 29.70 | 29.70 |
+| Python | 1,000,000 | 3 | 5.502833e-06 | 6.175875e-06 | 36.81 | 36.84 |
+| Python | 10,000,000 | 3 | 6.594459e-06 | 7.044791e-06 | 105.39 | 105.41 |
+| C++ | 10 | 3 | 1.1541e-08 | 1.6542e-08 | 1.27 | 1.27 |
+| C++ | 100 | 3 | 1.6625e-08 | 2.5334e-08 | 1.27 | 1.27 |
+| C++ | 1,000 | 3 | 2.9292e-08 | 3.5125e-08 | 1.28 | 1.28 |
+| C++ | 10,000 | 3 | 4.9625e-08 | 4.6541e-08 | 1.36 | 1.36 |
+| C++ | 100,000 | 3 | 6.8208e-08 | 5.4708e-08 | 2.05 | 2.05 |
+| C++ | 1,000,000 | 3 | 8.5958e-08 | 6.35e-08 | 8.94 | 8.94 |
+| C++ | 10,000,000 | 3 | 1.12625e-07 | 7.5709e-08 | 77.59 | 77.58 |
+| Lenguaje MATLAB · GNU Octave | 10 | 3 | 6.5741062e-05 | 8.8841915e-05 | 47.41 | 47.98 |
+| Lenguaje MATLAB · GNU Octave | 100 | 3 | 9.4614029e-05 | 0.00014412284 | 47.72 | 47.44 |
+| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.00011139607 | 0.00020876694 | 47.70 | 47.92 |
+| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.00015724897 | 0.00028690815 | 47.50 | 48.50 |
+| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.00019443297 | 0.00031900096 | 48.47 | 49.05 |
+| Lenguaje MATLAB · GNU Octave | 1,000,000 | 3 | 0.00021131587 | 0.00038288212 | 55.45 | 56.20 |
+| Lenguaje MATLAB · GNU Octave | 10,000,000 | 3 | 0.00025612378 | 0.0004969871 | 124.05 | 124.89 |
 
 ![Tiempo y memoria: Búsqueda binaria del último elemento](graficas/busqueda_tiempo_memoria.png)
 
@@ -233,27 +233,27 @@ Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proc
 
 | Lenguaje / entorno | N | Rep. | Tiempo iterativo (s) | Tiempo recursivo (s) | RSS iterativo (MiB) | RSS recursivo (MiB) |
 |---|---:|---:|---:|---:|---:|---:|
-| Python | 10 | 3 | 8.5000011e-06 | 1.1667e-05 | 39.31 | 39.48 |
-| Python | 100 | 3 | 1.7208e-05 | 1.7041999e-05 | 39.47 | 39.31 |
-| Python | 1,000 | 3 | 0.000117166 | 0.000111917 | 39.36 | 39.50 |
-| Python | 10,000 | 3 | 0.00111925 | 0.00109575 | 39.42 | 39.55 |
-| Python | 100,000 | 3 | 0.011589583 | 0.011450375 | 41.67 | 41.59 |
-| Python | 1,000,000 | 1 | 0.11402667 | 0.11483192 | 48.83 | 48.78 |
-| Python | 10,000,000 | 1 | 1.1539707 | 1.1798795 | 117.44 | 117.41 |
-| C++ | 10 | 3 | 8.3e-08 | 1.25e-07 | 1.27 | 1.27 |
-| C++ | 100 | 3 | 1.67e-07 | 1.25e-07 | 1.27 | 1.27 |
-| C++ | 1,000 | 3 | 7.91e-07 | 7.5e-07 | 1.30 | 1.30 |
-| C++ | 10,000 | 3 | 1.1042e-05 | 1.0584e-05 | 1.38 | 1.38 |
-| C++ | 100,000 | 3 | 4.3833e-05 | 4.7042e-05 | 2.06 | 2.06 |
-| C++ | 1,000,000 | 1 | 0.001159042 | 0.001391709 | 8.94 | 8.94 |
-| C++ | 10,000,000 | 1 | 0.013205834 | 0.01346425 | 77.59 | 77.59 |
-| Lenguaje MATLAB · GNU Octave | 10 | 3 | 9.5844269e-05 | 0.00011205673 | 48.97 | 49.27 |
-| Lenguaje MATLAB · GNU Octave | 100 | 3 | 0.00032496452 | 0.00033092499 | 48.78 | 49.31 |
-| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.0025949478 | 0.0026209354 | 48.34 | 48.69 |
-| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.024338961 | 0.026743889 | 48.92 | 49.61 |
-| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.25019193 | 0.26897597 | 53.52 | 54.20 |
-| Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 2.516705 | 2.6718512 | 57.81 | 57.47 |
-| Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 24.263931 | 27.757135 | 127.61 | 127.84 |
+| Python | 10 | 3 | 9.9160006e-06 | 1.175e-05 | 34.27 | 34.16 |
+| Python | 100 | 3 | 1.65e-05 | 2.1e-05 | 34.03 | 34.33 |
+| Python | 1,000 | 3 | 0.000115 | 0.000119125 | 34.16 | 34.31 |
+| Python | 10,000 | 3 | 0.001160333 | 0.001117333 | 34.28 | 34.19 |
+| Python | 100,000 | 3 | 0.011804625 | 0.011809042 | 36.69 | 36.95 |
+| Python | 1,000,000 | 1 | 0.11291133 | 0.11748192 | 45.36 | 43.67 |
+| Python | 10,000,000 | 1 | 2.0451789 | 2.0156117 | 112.72 | 113.39 |
+| C++ | 10 | 3 | 1.67e-07 | 1.67e-07 | 1.27 | 1.27 |
+| C++ | 100 | 3 | 2.08e-07 | 2.5e-07 | 1.27 | 1.27 |
+| C++ | 1,000 | 3 | 1e-06 | 9.58e-07 | 1.30 | 1.30 |
+| C++ | 10,000 | 3 | 1.1333e-05 | 1.0625e-05 | 1.38 | 1.38 |
+| C++ | 100,000 | 3 | 0.000115708 | 4.6958e-05 | 2.06 | 2.06 |
+| C++ | 1,000,000 | 1 | 0.001147916 | 0.001542209 | 8.94 | 8.94 |
+| C++ | 10,000,000 | 1 | 0.0152365 | 0.020931792 | 77.59 | 77.58 |
+| Lenguaje MATLAB · GNU Octave | 10 | 3 | 0.0001039505 | 0.0001039505 | 48.81 | 48.39 |
+| Lenguaje MATLAB · GNU Octave | 100 | 3 | 0.00032377243 | 0.00032496452 | 48.88 | 49.14 |
+| Lenguaje MATLAB · GNU Octave | 1,000 | 3 | 0.0026769638 | 0.0027730465 | 49.08 | 48.42 |
+| Lenguaje MATLAB · GNU Octave | 10,000 | 3 | 0.026810884 | 0.029730082 | 49.27 | 49.58 |
+| Lenguaje MATLAB · GNU Octave | 100,000 | 3 | 0.26173902 | 0.27939105 | 53.38 | 53.20 |
+| Lenguaje MATLAB · GNU Octave | 1,000,000 | 1 | 2.5259931 | 2.7154968 | 60.50 | 57.88 |
+| Lenguaje MATLAB · GNU Octave | 10,000,000 | 1 | 32.389344 | 29.813134 | 124.06 | 131.52 |
 
 ![Tiempo y memoria: Cuadrados de 0 a N−1](graficas/cuadrados_tiempo_memoria.png)
 
@@ -270,11 +270,11 @@ Para N=10 se necesitan 4 comparaciones para encontrar el último valor; para N=1
 
 ### Observaciones medidas a N=10 000 000
 
-- **Filtrado: valores mayores que 5:** Python: 1.49024 s iterativo y 1.54105 s recursivo (T_rec/T_iter=1.03); C++: 0.0235292 s iterativo y 0.0218164 s recursivo (T_rec/T_iter=0.93); Lenguaje MATLAB · GNU Octave: 37.7853 s iterativo y 41.2246 s recursivo (T_rec/T_iter=1.09).
-- **Conteo de N elementos:** Python: 0.408707 s iterativo y 0.417169 s recursivo (T_rec/T_iter=1.02); C++: 0.0153095 s iterativo y 0.0157176 s recursivo (T_rec/T_iter=1.03); Lenguaje MATLAB · GNU Octave: 5.54944 s iterativo y 7.77261 s recursivo (T_rec/T_iter=1.40).
-- **Suma de 1 a N:** Python: 0.576438 s iterativo y 0.566388 s recursivo (T_rec/T_iter=0.98); C++: 0.0154071 s iterativo y 0.0155768 s recursivo (T_rec/T_iter=1.01); Lenguaje MATLAB · GNU Octave: 9.11304 s iterativo y 10.9749 s recursivo (T_rec/T_iter=1.20).
-- **Búsqueda binaria del último elemento:** Python: 6.41588e-06 s iterativo y 7.06575e-06 s recursivo (T_rec/T_iter=1.10); C++: 9.5917e-08 s iterativo y 7.6625e-08 s recursivo (T_rec/T_iter=0.80); Lenguaje MATLAB · GNU Octave: 0.000247253 s iterativo y 0.000463999 s recursivo (T_rec/T_iter=1.88).
-- **Cuadrados de 0 a N−1:** Python: 1.15397 s iterativo y 1.17988 s recursivo (T_rec/T_iter=1.02); C++: 0.0132058 s iterativo y 0.0134643 s recursivo (T_rec/T_iter=1.02); Lenguaje MATLAB · GNU Octave: 24.2639 s iterativo y 27.7571 s recursivo (T_rec/T_iter=1.14).
+- **Filtrado: valores mayores que 5:** Python: 1.6684 s iterativo y 1.56941 s recursivo (T_rec/T_iter=0.94); C++: 0.0514056 s iterativo y 0.0480898 s recursivo (T_rec/T_iter=0.94); Lenguaje MATLAB · GNU Octave: 44.6674 s iterativo y 42.7426 s recursivo (T_rec/T_iter=0.96).
+- **Conteo de N elementos:** Python: 0.393128 s iterativo y 0.430111 s recursivo (T_rec/T_iter=1.09); C++: 0.0181161 s iterativo y 0.0218845 s recursivo (T_rec/T_iter=1.21); Lenguaje MATLAB · GNU Octave: 5.8599 s iterativo y 8.2144 s recursivo (T_rec/T_iter=1.40).
+- **Suma de 1 a N:** Python: 0.531486 s iterativo y 0.585589 s recursivo (T_rec/T_iter=1.10); C++: 0.0192165 s iterativo y 0.018787 s recursivo (T_rec/T_iter=0.98); Lenguaje MATLAB · GNU Octave: 8.87602 s iterativo y 11.3928 s recursivo (T_rec/T_iter=1.28).
+- **Búsqueda binaria del último elemento:** Python: 6.59446e-06 s iterativo y 7.04479e-06 s recursivo (T_rec/T_iter=1.07); C++: 1.12625e-07 s iterativo y 7.5709e-08 s recursivo (T_rec/T_iter=0.67); Lenguaje MATLAB · GNU Octave: 0.000256124 s iterativo y 0.000496987 s recursivo (T_rec/T_iter=1.94).
+- **Cuadrados de 0 a N−1:** Python: 2.04518 s iterativo y 2.01561 s recursivo (T_rec/T_iter=0.99); C++: 0.0152365 s iterativo y 0.0209318 s recursivo (T_rec/T_iter=1.37); Lenguaje MATLAB · GNU Octave: 32.3893 s iterativo y 29.8131 s recursivo (T_rec/T_iter=0.92).
 
 Un cociente T_rec/T_iter mayor que 1 indica que la recursiva tardó más. Los recorridos grandes tienen una sola observación por caso: estas cifras describen la ejecución, no prueban superioridad estadística. C++ ya es código compilado; Python y Octave tienen otros costos de interpretación y bibliotecas. Los tiempos de Octave no predicen los de MATLAB ni su compilador JIT.
 
@@ -288,13 +288,27 @@ Un cociente T_rec/T_iter mayor que 1 indica que la recursiva tardó más. Los re
 - `resultados/registros.jsonl`: registro completo de ejecución y RSS por proceso.
 - `resultados/logs/`: salidas de cada proceso, para auditoría.
 - `resultados/recursion_lineal.csv`, `comparaciones_busqueda.csv`, `entorno.json`: diagnósticos y versiones.
-- `LEEME.md`: instrucciones para ejecutarlo en VS Code o en una terminal.
+
+### Ejecutar en una terminal o VS Code
+
+Se requieren Python con NumPy y Matplotlib, un compilador C++17 GCC/Clang y GNU Octave o MATLAB. La medición externa de RSS utiliza `wait4`, disponible en macOS y Linux.
+
+```sh
+python3 -m pip install -r requirements.txt
+python3 ejecutar.py
+```
+
+En VS Code abre esta carpeta y ejecuta la tarea de compilación (⌘⇧B en macOS). Para regenerar únicamente las gráficas y este informe: `python3 ejecutar.py --solo-graficas`. Para continuar una ejecución interrumpida sin cambios de código: `python3 ejecutar.py --reanudar`. Para usar MATLAB real: `python3 ejecutar.py --matlab`.
+
+`runtime_local.json` es una configuración local opcional, excluida de Git. También se pueden indicar los ejecutables con `TAREA3_PYTHON`, `TAREA3_OCTAVE` y `TAREA3_MATLAB`. Sin configuración local, se utilizan el intérprete Python actual y los ejecutables del PATH. El orquestador compila C++ antes de medir; el binario no necesita almacenarse en GitHub.
+
+Las gráficas y README se regeneran a partir de los resultados, por lo que las explicaciones permanentes deben editarse en `graficar_reporte.py`. La ejecución completa sustituye los resultados existentes.
 
 ## 11. Entorno y límites de las conclusiones
 
 ```json
 {
-  "fecha": "2026-11-22 18:29:59 -0600",
+  "fecha": "2026-11-22 18:33:00 -0600",
   "sistema": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
   "python_numpy": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]\nNumPy 2.5.4\n",
   "compilador": "Apple clang version 21.0.0 (clang-2100.3.34.2)",

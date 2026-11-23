@@ -62,7 +62,7 @@ def lanzar(cmd,env,log):
 def guardar_csv(ruta,filas):
     if not filas: return
     with ruta.open('w',newline='') as archivo:
-        w=csv.DictWriter(archivo,fieldnames=list(filas[0]))
+        w=csv.DictWriter(archivo,fieldnames=list(filas[0]),lineterminator="\n")
         w.writeheader(); w.writerows(filas)
 
 
@@ -164,7 +164,7 @@ def main():
                         raise SystemExit(f'Falló el caso; consulta {archivo}. Se puede reanudar.')
     subprocess.run([python,str(RAIZ/'diagnostico_recursion.py')],cwd=RAIZ,env=env,check=True)
     subprocess.run([python,str(RAIZ/'graficar_reporte.py')],cwd=RAIZ,env=env,check=True)
-    print('TERMINADO: resultados, gráficas y REPORTE.md.',flush=True)
+    print('TERMINADO: resultados, gráficas y README.md.',flush=True)
 
 
 if __name__=='__main__':
