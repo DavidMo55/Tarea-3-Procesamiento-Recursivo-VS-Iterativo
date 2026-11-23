@@ -1,0 +1,22 @@
+funcion,N,estado,resultado,limite_recursion_python
+suma_lineal,10,correcto,55,1000
+suma_lineal,100,correcto,5050,1000
+suma_lineal,1000,RecursionError: no resuelve este tamaño,,1000
+suma_lineal,10000,RecursionError: no resuelve este tamaño,,1000
+suma_lineal,100000,RecursionError: no resuelve este tamaño,,1000
+suma_lineal,1000000,RecursionError: no resuelve este tamaño,,1000
+suma_lineal,10000000,RecursionError: no resuelve este tamaño,,1000
+suma_cola,10,correcto,55,1000
+suma_cola,100,correcto,5050,1000
+suma_cola,1000,RecursionError: no resuelve este tamaño,,1000
+suma_cola,10000,RecursionError: no resuelve este tamaño,,1000
+suma_cola,100000,RecursionError: no resuelve este tamaño,,1000
+suma_cola,1000000,RecursionError: no resuelve este tamaño,,1000
+suma_cola,10000000,RecursionError: no resuelve este tamaño,,1000
+conteo_lineal,10,correcto,10,1000
+conteo_lineal,100,correcto,100,1000
+conteo_lineal,1000,RecursionError: no resuelve este tamaño,,1000
+conteo_lineal,10000,RecursionError: no resuelve este tamaño,,1000
+conteo_lineal,100000,RecursionError: no resuelve este tamaño,,1000
+conteo_lineal,1000000,RecursionError: no resuelve este tamaño,,1000
+conteo_lineal,10000000,RecursionError: no resuelve este tamaño,,1000
