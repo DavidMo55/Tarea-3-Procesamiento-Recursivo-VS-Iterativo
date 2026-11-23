@@ -137,6 +137,53 @@ def explicar_tabla(filas, lenguajes, algoritmo):
     return texto
 
 
+def condensado(filas, lenguajes):
+    n = max(TAMANOS)
+    seleccion = [r for r in filas if r['N'] == n and r['estado'] == 'correcto']
+    texto = (f"### Comparación condensada: N = {n:,} elementos\n\n"
+             'Cada fila compara ambos métodos para un algoritmo y un lenguaje en el tamaño máximo. '
+             'Los tiempos están en segundos y la memoria en MiB de RSS del proceso completo. '
+             '**T_rec/T_iter < 1** favorece a la recursiva; **> 1** favorece a la iterativa.\n\n'
+             '| Algoritmo | Lenguaje / entorno | Iterativo (s) | Recursivo (s) | T_rec/T_iter | RSS iterativo (MiB) | RSS recursivo (MiB) |\n'
+             '|---|---|---:|---:|---:|---:|---:|\n')
+    pares = []
+    for a in NOMBRES:
+        for l in lenguajes:
+            par = {r['metodo']: r for r in seleccion if r['algoritmo'] == a and r['lenguaje'] == l}
+            if set(par) != {'iterativo', 'recursivo'}:
+                continue
+            i, r = par['iterativo'], par['recursivo']
+            ti, tr = i['tiempo_mediana_s'], r['tiempo_mediana_s']
+            pares.append((a, l, ti, tr, i, r))
+            texto += (f"| {'Búsqueda' if a == 'busqueda' else a.capitalize()} | {LABEL[l]} | {ti:.6g} | {tr:.6g} | {tr/ti:.3f} | "
+                      f"{i['rss_pico_bytes']/2**20:.2f} | {r['rss_pico_bytes']/2**20:.2f} |\n")
+    texto += (f"\n**Cobertura:** {len(pares)} comparaciones y {len(pares)*2} casos "
+              '(cada combinación de algoritmo y lenguaje incluye los dos métodos).\n\n'
+              '**Lectura del cociente:** 1.20 significa que la recursiva tardó un 20% más; '
+              '0.80 significa que tardó un 20% menos. Un valor próximo a 1 indica tiempos similares.\n\n'
+              '**Conclusiones para este tamaño:**\n\n')
+    for a in NOMBRES:
+        casos = [x for x in pares if x[0] == a]
+        partes = []
+        for _, l, ti, tr, i, r in casos:
+            cambio = (tr/ti-1)*100
+            comparacion = ('tiempos prácticamente iguales' if abs(cambio)<0.05 else
+                          f"recursiva {abs(cambio):.1f}% {'más lenta' if cambio>0 else 'más rápida'}")
+            partes.append(f'{LABEL[l]}: {comparacion}')
+        texto += f"- **{'Búsqueda' if a == 'busqueda' else a.capitalize()}:** " + '; '.join(partes) + '.\n'
+    texto += ('\n**Memoria:** compara las dos columnas RSS dentro del mismo lenguaje. '
+              'El total incluye intérprete, bibliotecas, entrada, salida y validación; '
+              'no es la memoria exclusiva de la función ni permite atribuir diferencias pequeñas a la pila. '
+              'Filtrado necesita entrada y salida; búsqueda conserva una entrada grande; cuadrados reserva la salida; '
+              'conteo y suma usan acumuladores.\n\n'
+              '**Límites de esta comparación:** los cuatro recorridos tienen una sola medición temporal a este tamaño. '
+              'La búsqueda usa la mediana de tres lotes de 1 000 búsquedas y reporta tiempo por búsqueda. '
+              'La búsqueda recursiva es pura; los otros algoritmos usan recursión híbrida con bloques de 256 elementos. '
+              'Las diferencias describen esta ejecución y no garantizan una ventaja estable. '
+              'El código MATLAB fue ejecutado en GNU Octave; no son tiempos del producto MATLAB.\n\n')
+    return texto
+
+
 def informe(filas,lenguajes):
     entorno=json.loads((RAIZ/'resultados'/'entorno.json').read_text())
     total=len(filas); ok=sum(r['estado']=='correcto' for r in filas)
@@ -247,6 +294,7 @@ Después de cada medición se validan conteos, sumas e índices; filtrado y cuad
 Tiempos en **segundos por ejecución**; memoria en **MiB de RSS máximo del proceso**. `Rep.` es el número de mediciones temporales por método. La recursión de búsqueda es pura; las otras cuatro son híbridas.
 
 '''
+    texto+=condensado(filas,lenguajes)
     for a,nombre in NOMBRES.items():
         texto+=f'### {nombre}\n\n| Lenguaje / entorno | N | Rep. | Tiempo iterativo (s) | Tiempo recursivo (s) | RSS iterativo (MiB) | RSS recursivo (MiB) |\n|---|---:|---:|---:|---:|---:|---:|\n'
         for l in lenguajes:
@@ -327,6 +375,9 @@ La comparación distingue tres cosas: iteración, recursión lineal que puede su
 - [MathWorks: memory](https://www.mathworks.com/help/matlab/ref/memory.html). Se eligió medición externa de RSS; la función `memory` de MATLAB tiene restricciones de plataforma.
 '''
     (RAIZ/'README.md').write_text(texto)
+    resumen = '# Tarea 3 — Condensado de resultados\n\n' + condensado(filas,lenguajes)
+    resumen += '[Consultar el reporte completo y las tablas de todos los tamaños](README.md).\n'
+    (RAIZ/'RESUMEN.md').write_text(resumen)
 
 
 if __name__=='__main__': main()
